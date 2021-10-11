@@ -1,0 +1,12 @@
+﻿<div class="container">
+    <div class="row justify-content-end">
+        <div class="col-md-6 col-md-push-8 searchfilter">
+            @using (Html.BeginForm())
+            {
+                <p class="search">
+                    Book Name @Html.TextBox("SearchName") <input type="submit" value="Search" />
+                </p>
+            }
+        </div>
+    </div>
+</div>

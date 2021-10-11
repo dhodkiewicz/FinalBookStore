@@ -24,8 +24,8 @@ textarea {
 }
 
 h1.gradient-text {
-    background-color: #f3ec78;
-    background-image: linear-gradient(45deg, #e6fff2, #006631);
+    background-color: rgb(54, 69, 120);
+    background-image: linear-gradient(45deg, #e6fff2, #9D00DA39);
     background-size: 100%;
     -webkit-background-clip: text;
     -moz-background-clip: text;
@@ -33,22 +33,40 @@ h1.gradient-text {
     -moz-text-fill-color: transparent;
 }
 
+ .text-responsive {
+    font-size: calc(120% + 1vw + 1vh);
+}
+
+.navbar-brand {
+    font-size: calc(100% + 1vw + 1vh);
+}
+
 .jumbotron {
-    background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+    background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(24, 180, 14, 0.93));
     opacity: 0.5;
     border-radius: 25px;
+}
+
+.top-buffer {
+    margin-top: 20px;
 }
 
 h1 {
     color: #ffffff;
     font-family: 'Raleway',sans-serif;
-    font-size: 62px;
     font-weight: 800;
     line-height: 72px;
     margin: 0 0 24px;
     text-align: center;
     text-transform: uppercase;
+    text-shadow: 1px 1px 2px black, 0 0 25px yellow, 0 0 5px darkblue;
 }
+
+    h1.animate__animated.animate__bounce {
+        animation: bounce; /* referring directly to the animation's @keyframe declaration */
+        animation-duration: 2s; /* don't forget to set a duration! */
+    }
+
 
 
 h2 {
@@ -61,6 +79,9 @@ h2 {
     text-align: center;
 }
 
+    h2:hover {
+        color: rgba(80, 242, 14, 0.93);
+    }
 
 p {
     color: #f8f8f8;
@@ -83,3 +104,35 @@ a:hover {
     text-decoration: underline;
 }
 
+.container-fluid {
+    padding: 20px;
+}
+
+.btnShow {
+    display:none;
+}
+
+#nav1 {
+    background-color: chartreuse;
+}
+
+.searchfilter {
+    background-color: chartreuse;
+    margin: 10px;
+    padding: 10px 10px;
+    text-align: center;
+    align-content: center;
+}
+
+.navbar-brand {
+
+}
+
+.container {
+    position: -ms-device-fixed;
+}
+
+p.search {
+    color: #1c1c1c;
+    text-size-adjust: 150%;
+}

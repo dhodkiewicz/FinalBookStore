@@ -1,0 +1,58 @@
+﻿@model FinalBookStore.Models.EntityFramework.BOOK
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BOOK</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TITLE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TITLE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TYPE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TYPE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRICE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRICE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PAPERBACK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PAPERBACK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PUBLISHER.PUBLISHER_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PUBLISHER.PUBLISHER_NAME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BOOK_CODE }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

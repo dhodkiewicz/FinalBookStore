@@ -1,0 +1,48 @@
+﻿@model FinalBookStore.Models.EntityFramework.INVENTORY
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>INVENTORY</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ON_HAND)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ON_HAND)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BOOK.TITLE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BOOK.TITLE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BRANCH.BRANCH_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BRANCH.BRANCH_NAME)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

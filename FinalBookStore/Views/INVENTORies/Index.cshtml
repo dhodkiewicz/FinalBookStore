@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FinalBookStore.Models.EntityFramework.INVENTORY>
+
+@{
+    ViewBag.Title = "Book Inventory";
+}
+
+<h2>Current Inventory</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <h3>On Hand</h3>
+        </th>
+        <th>
+            <h3>Title</h3>
+        </th>
+        <th>
+            <h3>Branch Name</h3>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ON_HAND)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BOOK.TITLE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BRANCH.BRANCH_NAME)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

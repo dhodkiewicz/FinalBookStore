@@ -5,7 +5,7 @@
 @model IEnumerable<FinalBookStore.Models.EntityFramework.PUBLISHER>
 
 @{
-    string text = ViewBag.Notice;
+
     List<SelectListItem> Publishers = new List<SelectListItem>();
     Publishers.Add(new SelectListItem() { Text = "Select Publisher", Value = "" });
     foreach (PUBLISHER publisher in ViewBag.ModelList)
@@ -19,12 +19,13 @@
 
 
 <h2>Publishers</h2>
+<h4 class="text-center alert-danger">@ViewBag.message</h4>
 <div class="row">
     <div class="col-4 text-center">
-       
+
         @using (Html.BeginForm("Index", "PUBLISHERs", FormMethod.Post))
         {
-            @Html.DropDownList("id", Publishers, new {onchange = "this.form.submit()"})
+            @Html.DropDownList("id", Publishers, new { onchange = "this.form.submit()" })
 
         }
     </div>

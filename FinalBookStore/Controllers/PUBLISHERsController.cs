@@ -36,14 +36,14 @@ namespace FinalBookStore.Controllers
         [HttpPost]
         public ActionResult Index(string id)
         {
+            ViewBag.ModelList = db.PUBLISHERs.ToList();
             if (id == "")
             {
-                ViewBag.Inform = "Please Make a Selection";
+                ViewBag.message = "Please Make a Selection";
             }
-            if (id != null)
+            if (id != "")
             {
-                ViewBag.Inform = "";
-                ViewBag.ModelList = db.PUBLISHERs.ToList();
+                ViewBag.message = "";
                 var publisher = db.PUBLISHERs.Find(id);
                 List<PUBLISHER> publisherList = new List<PUBLISHER>();
                 publisherList.Add(publisher);

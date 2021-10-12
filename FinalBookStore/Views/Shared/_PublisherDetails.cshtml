@@ -12,34 +12,47 @@
 @if (!check)
 {
     <div>
-        <h4>PUBLISHER</h4>
         <hr/>
 
-        @foreach (PUBLISHER p in Model)
-        {
-            <dl class="dl-horizontal">
-                <dt>
-                    Name
-                </dt>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Book Code</th>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Paperback</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (PUBLISHER p in Model)
+            {
+                foreach (BOOK b in p.BOOKs)
+                {
+                <tr>
+                    <th>
+                         @Html.ActionLink(
+                                  b.BOOK_CODE, // linkText
+                                  "Details", // actionName
+                                  "BOOKs", // controllerName
+                                  new
+                                  {
+                                      // routeValues
+                                      ID = b.BOOK_CODE
+                                  },
+                                  null // htmlAttributes
+                                  )
+                    </th>
+                    <th>@b.TITLE</th>
+                    <th>@b.TYPE</th>
+                    @{ decimal t = b.PRICE.Value;}
+                    <th>@t.ToString("C2")</th>
+                    <th>@b.PAPERBACK</th>
+                </tr>
+                }
+            }
+            </tbody>
 
-                <dd>
-                    @p.PUBLISHER_NAME;
-                </dd>
-
-                <dt>
-                    City
-                </dt>
-
-                <dd>
-                    @p.CITY
-                </dd>
-
-            </dl>
-        }
+        </table>
     </div>
-    <p>
-        @Html.ActionLink("Back to List", "Index", "PUBLISHERs")
-    </p>
-
-    ViewBag.Notice = "Please Make a Selection";
 }

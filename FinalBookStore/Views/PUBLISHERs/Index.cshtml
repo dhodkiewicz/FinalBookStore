@@ -1,39 +1,40 @@
-﻿@model IEnumerable<FinalBookStore.Models.EntityFramework.PUBLISHER>
+﻿@using System.Collections
+@using System.IdentityModel.Tokens
+@using System.Web.Mvc.Html
+@using FinalBookStore.Models.EntityFramework
+@model IEnumerable<FinalBookStore.Models.EntityFramework.PUBLISHER>
 
 @{
-    ViewBag.Title = "Index";
+    string text = ViewBag.Notice;
+    List<SelectListItem> Publishers = new List<SelectListItem>();
+    Publishers.Add(new SelectListItem() { Text = "Select Publisher", Value = "" });
+    foreach (PUBLISHER publisher in ViewBag.ModelList)
+    {
+        Publishers.Add(new SelectListItem() { Text = publisher.PUBLISHER_NAME, Value = publisher.PUBLISHER_CODE });
+    }
+
+    bool flag = Model.Count() == 1;
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PUBLISHER_NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CITY)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PUBLISHER_NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CITY)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PUBLISHER_CODE }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PUBLISHER_CODE }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PUBLISHER_CODE })
-        </td>
-    </tr>
+<h2>Publishers</h2>
+<div class="row">
+    <div class="col-4 text-center">
+       
+        @using (Html.BeginForm("Index", "PUBLISHERs", FormMethod.Post))
+        {
+            @Html.DropDownList("id", Publishers, new {onchange = "this.form.submit()"})
+
+        }
+    </div>
+</div>
+
+@if (flag)
+{
+    if (Model != null)
+    {
+        @Html.Partial("_PublisherDetails")
+    }
+
 }
-
-</table>

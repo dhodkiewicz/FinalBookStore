@@ -1,5 +1,6 @@
 ﻿@using System.Diagnostics.Eventing.Reader
 @using FinalBookStore.Models.EntityFramework
+@using Microsoft.Ajax.Utilities
 @model FinalBookStore.Models.EntityFramework.AUTHOR
 
 <div>
@@ -22,10 +23,21 @@
             foreach (BOOK vp in Model.BOOKs)
             {
                 <tr>
-                    <th>@vp.BOOK_CODE</th>
+                    <th> 
+                        @Html.ActionLink(
+                            @vp.BOOK_CODE,                                                  // linkText
+                            "Details",                                    // actionName
+                            "BOOKs",                                                   // controllerName
+                            new {                                                     // routeValues
+                                ID = @vp.BOOK_CODE
+                            },
+                            null                                                      // htmlAttributes
+                            )
+                    </th>
                     <th>@vp.TITLE</th>
                     <th>@vp.TYPE</th>
-                    <th>@vp.PRICE</th>
+                    @{ decimal x = vp.PRICE.Value;}
+                    <th>@x.ToString("C2")</th>
                     @if (@vp.PAPERBACK == "1")
                     {
                         <th>True</th>
@@ -49,21 +61,42 @@
             }
         }
         @if (Model.Book != null){
-            <tr>
-                <th>@Model.Book.BOOK_CODE</th>
-                <th>@Model.Book.TITLE</th>
-                <th>@Model.Book.TYPE</th>
-                <th>@Model.Book.PRICE</th>
-                @if (@Model.Book.PAPERBACK == "1")
-                {
-                    <th>True</th>
-                }
-                @if (@Model.Book.PAPERBACK == "0")
-                {
-                    <th>False</th>
-                }
-                <th>@Model.Book.PUBLISHER.PUBLISHER_NAME</th>
-            </tr>
+        <tr>
+            <th> 
+                @Html.ActionLink(
+                                    @Model.Book.BOOK_CODE,                                                  // linkText
+                                    "Details",                                    // actionName
+                                    "BOOKs",                                                   // controllerName
+                                    new {                                                     // routeValues
+                                        ID = @Model.Book.BOOK_CODE
+                                    },
+                                    null                                                      // htmlAttributes
+                                    )
+                </th>
+            <th>@Model.Book.TITLE</th>
+            <th>@Model.Book.TYPE</th>
+            @{ decimal x = Model.Book.PRICE.Value;}
+            <th>@x.ToString("C2")</th>
+            @if (@Model.Book.PAPERBACK == "1")
+            {
+                <th>True</th>
+            }
+            @if (@Model.Book.PAPERBACK == "0")
+            {
+                <th>False</th>
+            }
+            <th>
+                @Html.ActionLink(
+                    @Model.Book.PUBLISHER.PUBLISHER_NAME,                                                  // linkText
+                    "Details",                                    // actionName
+                    "PUBLISHERs",                                                   // controllerName
+                    new {                                                     // routeValues
+                        ID = @Model.Book.PUBLISHER.PUBLISHER_CODE
+                    },
+                    null                                                      // htmlAttributes
+                    )
+            </th>
+        </tr>
         }
         </tbody>
 

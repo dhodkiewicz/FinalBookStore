@@ -18,21 +18,48 @@ namespace FinalBookStore.Controllers
         // GET: PUBLISHERs
         public ActionResult Index()
         {
+            var publishers = db.PUBLISHERs.ToList();
+            ViewBag.ModelList = db.PUBLISHERs.ToList();
+            List<SelectListItem> pubList = new List<SelectListItem>();
+            pubList.Add(new SelectListItem() { Text = "Select Publisher", Value = "" });
+            foreach (PUBLISHER publisher in publishers)
+            {
+                pubList.Add(new SelectListItem() { Text = publisher.PUBLISHER_NAME, Value = publisher.PUBLISHER_CODE });
+            }
+
+            ViewBag.Publishers = pubList;
+
+            return View(db.PUBLISHERs.ToList());
+
+        }
+
+        [HttpPost]
+        public ActionResult Index(string id)
+        {
+            if (id == "")
+            {
+                ViewBag.Inform = "Please Make a Selection";
+            }
+            if (id != null)
+            {
+                ViewBag.Inform = "";
+                ViewBag.ModelList = db.PUBLISHERs.ToList();
+                var publisher = db.PUBLISHERs.Find(id);
+                List<PUBLISHER> publisherList = new List<PUBLISHER>();
+                publisherList.Add(publisher);
+                return View(publisherList);
+            }
             return View(db.PUBLISHERs.ToList());
         }
 
         // GET: PUBLISHERs/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(PUBLISHER pub)
         {
-            if (id == null)
+            if (pub == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PUBLISHER pUBLISHER = db.PUBLISHERs.Find(id);
-            if (pUBLISHER == null)
-            {
-                return HttpNotFound();
-            }
+            PUBLISHER pUBLISHER = db.PUBLISHERs.Find(pub);
             return View(pUBLISHER);
         }
 

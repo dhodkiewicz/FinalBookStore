@@ -19,7 +19,8 @@ namespace FinalBookStore.Models.EntityFramework
         {
             this.BOOKs = new HashSet<BOOK>();
         }
-    
+
+
         public string PUBLISHER_CODE { get; set; }
         public string PUBLISHER_NAME { get; set; }
         public string CITY { get; set; }

@@ -1,0 +1,45 @@
+﻿@using System.Activities.Statements
+@using FinalBookStore.Models.EntityFramework
+@model IEnumerable<FinalBookStore.Models.EntityFramework.PUBLISHER>
+
+@{
+    ViewBag.Title = "Details";
+    var x = Model;
+    bool check = Model.First() == null;
+}
+
+
+@if (!check)
+{
+    <div>
+        <h4>PUBLISHER</h4>
+        <hr/>
+
+        @foreach (PUBLISHER p in Model)
+        {
+            <dl class="dl-horizontal">
+                <dt>
+                    Name
+                </dt>
+
+                <dd>
+                    @p.PUBLISHER_NAME;
+                </dd>
+
+                <dt>
+                    City
+                </dt>
+
+                <dd>
+                    @p.CITY
+                </dd>
+
+            </dl>
+        }
+    </div>
+    <p>
+        @Html.ActionLink("Back to List", "Index", "PUBLISHERs")
+    </p>
+
+    ViewBag.Notice = "Please Make a Selection";
+}

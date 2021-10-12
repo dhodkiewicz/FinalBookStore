@@ -1,45 +1,34 @@
-﻿@model IEnumerable<FinalBookStore.Models.EntityFramework.BRANCH>
+﻿@using FinalBookStore.Models.EntityFramework
+@model IEnumerable<FinalBookStore.Models.EntityFramework.BRANCH>
+
+
 
 @{
-    ViewBag.Title = "Index";
+
+    List<SelectListItem> Branches = new List<SelectListItem>();
+    Branches.Add(new SelectListItem() { Text = "Select Branch", Value = "" });
+    foreach (BRANCH branch in ViewBag.ModelList)
+    {
+        Branches.Add(new SelectListItem()
+        {
+            Text = branch.BRANCH_NAME, Value = branch.BRANCH_NUM.ToString()
+        });
+    }
+
+    bool flag = Model.Count() == 1;
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.BRANCH_NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BRANCH_LOCATION)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NUM_EMPLOYEES)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BRANCH_NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BRANCH_LOCATION)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NUM_EMPLOYEES)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BRANCH_NUM }) |
-            @Html.ActionLink("Details", "Details", new { id=item.BRANCH_NUM }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BRANCH_NUM })
-        </td>
-    </tr>
-}
+<h2>Branches</h2>
+<h4 class="text-center alert-danger">@ViewBag.message</h4>
+<div class="row">
+    <div class="col-4 text-center">
 
-</table>
+        @using (Html.BeginForm("Index", "BRANCHes", FormMethod.Post))
+        {
+            @Html.DropDownList("id", Branches, new { onchange = "this.form.submit()" })
+
+        }
+    </div>
+</div>

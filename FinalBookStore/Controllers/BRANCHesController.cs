@@ -18,6 +18,41 @@ namespace FinalBookStore.Controllers
         // GET: BRANCHes
         public ActionResult Index()
         {
+            var branches = db.BRANCHes.ToList();
+            ViewBag.ModelList = db.BRANCHes.ToList();
+            List<SelectListItem> pubList = new List<SelectListItem>();
+            pubList.Add(new SelectListItem() { Text = "Select Branch", Value = "" });
+            foreach (BRANCH b in branches)
+            {
+                pubList.Add(new SelectListItem()
+                {
+                    Text = b.BRANCH_NAME, Value = b.BRANCH_NUM.ToString()
+
+                });
+            }
+
+            ViewBag.Publishers = pubList;
+
+            return View(db.BRANCHes.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult Index(string id)
+        {
+            ViewBag.ModelList = db.BRANCHes.ToList();
+            if (id == "")
+            {
+                ViewBag.message = "Please Make a Selection";
+            }
+            if (id != "")
+            {
+                ViewBag.message = "";
+                var temp = int.Parse(id);
+                var branch = db.BRANCHes.Find(temp);
+                List<BRANCH> branchList = new List<BRANCH>();
+                branchList.Add(branch);
+                return View(branchList);
+            }
             return View(db.BRANCHes.ToList());
         }
 

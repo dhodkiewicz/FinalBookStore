@@ -3,7 +3,6 @@
 @model IEnumerable<FinalBookStore.Models.EntityFramework.AUTHOR>
 
 @{
-    ViewBag.Title = "Index";
     List<SelectListItem> Authors = new List<SelectListItem>();
     Authors.Add(new SelectListItem() { Text = "Select Author", Value= "" });
     foreach (AUTHOR author in Model)
@@ -24,8 +23,6 @@
 </div>
 
 
-
-            @*@Html.ValidationMessageFor(x => x.SelectedCountryIso3, "", new { @class = "text-danger" })*@
 
 
 

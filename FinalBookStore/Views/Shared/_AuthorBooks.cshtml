@@ -1,24 +1,77 @@
-﻿@model FinalBookStore.Models.EntityFramework.AUTHOR
+﻿@using System.Diagnostics.Eventing.Reader
+@using FinalBookStore.Models.EntityFramework
+@model FinalBookStore.Models.EntityFramework.AUTHOR
 
 <div>
-    <h4>AUTHOR</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.AUTHOR_LAST)
-        </dt>
+    <h2>Author's Books</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.AUTHOR_LAST)
-        </dd>
+    @if(@Model.WROTEs.Count > 0){
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Book Code</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Paperback</th>
+            <th>Publisher</th>
+        </tr>
+        </thead>
+        <tbody>
+        @if (Model.BOOKs != null){
+            foreach (BOOK vp in Model.BOOKs)
+            {
+                <tr>
+                    <th>@vp.BOOK_CODE</th>
+                    <th>@vp.TITLE</th>
+                    <th>@vp.TYPE</th>
+                    <th>@vp.PRICE</th>
+                    @if (@vp.PAPERBACK == "1")
+                    {
+                        <th>True</th>
+                    }
+                    @if (@vp.PAPERBACK == "0")
+                    {
+                        <th>False</th>
+                    }
+                    <th>
+                        @Html.ActionLink(
+                            @vp.PUBLISHER.PUBLISHER_NAME,                                                  // linkText
+                            "Details",                                    // actionName
+                            "PUBLISHERs",                                                   // controllerName
+                            new {                                                     // routeValues
+                                ID = @vp.PUBLISHER.PUBLISHER_CODE
+                            },
+                            null                                                      // htmlAttributes
+                            )
+                    </th>
+                </tr>
+            }
+        }
+        @if (Model.Book != null){
+            <tr>
+                <th>@Model.Book.BOOK_CODE</th>
+                <th>@Model.Book.TITLE</th>
+                <th>@Model.Book.TYPE</th>
+                <th>@Model.Book.PRICE</th>
+                @if (@Model.Book.PAPERBACK == "1")
+                {
+                    <th>True</th>
+                }
+                @if (@Model.Book.PAPERBACK == "0")
+                {
+                    <th>False</th>
+                }
+                <th>@Model.Book.PUBLISHER.PUBLISHER_NAME</th>
+            </tr>
+        }
+        </tbody>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AUTHOR_FIRST)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AUTHOR_FIRST)
-        </dd>
-
-    </dl>
+    </table>
+    }
+    @if (@Model.WROTEs.Count == 0)
+    {
+        <br/>
+        <h2>No Books Written by this Author</h2>
+    }
 </div>

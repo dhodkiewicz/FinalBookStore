@@ -19,7 +19,6 @@ namespace FinalBookStore.Controllers
         // GET: AUTHORs
         public ActionResult Index()
         {
-            ViewBag.Authors = db.AUTHORs.ToList();
             return View(db.AUTHORs.ToList());
         }
 
@@ -38,6 +37,10 @@ namespace FinalBookStore.Controllers
 
             var wrotes = db.WROTEs.Where(x => x.AUTHOR_NUM == aUTHOR.AUTHOR_NUM);
             aUTHOR.WROTEs = wrotes.ToList();
+            if (aUTHOR.WROTEs.Count == 0)
+            {
+                return View(aUTHOR);
+            }
             if (aUTHOR.WROTEs.Count > 1)
             {
                 aUTHOR.BOOKs =
@@ -48,7 +51,7 @@ namespace FinalBookStore.Controllers
             else
             {
                 WROTE wrote = aUTHOR.WROTEs.First();
-                //aUTHOR.BOOKs = db.BOOKs.FirstOrDefault(x => x.BOOK_CODE == wrote.BOOK_CODE);
+                aUTHOR.Book = db.BOOKs.First(x => x.BOOK_CODE == wrote.BOOK_CODE);
             }
 
             return View(aUTHOR);

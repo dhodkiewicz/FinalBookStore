@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Web.Mvc;
+
 namespace FinalBookStore.Models.EntityFramework
 {
     using System;
@@ -23,8 +25,17 @@ namespace FinalBookStore.Models.EntityFramework
         public int AUTHOR_NUM { get; set; }
         public string AUTHOR_LAST { get; set; }
         public string AUTHOR_FIRST { get; set; }
-    
+
+        public string FullName { get; set; }
+
+        public IEnumerable<SelectListItem> Authors { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WROTE> WROTEs { get; set; }
+
+        public virtual ICollection<BOOK> BOOKs { get; set; }
+
+        public BOOK Book { get; set; }
+
     }
 }

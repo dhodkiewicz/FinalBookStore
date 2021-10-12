@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Dynamic;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FinalBookStore;
+using FinalBookStore.Models;
 using FinalBookStore.Models.EntityFramework;
 
 namespace FinalBookStore.Controllers
@@ -29,12 +31,27 @@ namespace FinalBookStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BOOK bOOK = db.BOOKs.Find(id);
-            if (bOOK == null)
+            BOOK book = db.BOOKs.Find(id);
+            var wrotes = db.WROTEs.Where(x => x.BOOK_CODE == id);
+            int authorNumber = 0;
+            CustomDataModel cdm = new CustomDataModel();
+            var inventorys = db.INVENTORies.Where(x => x.BOOK_CODE == id);
+            var branches = db.BRANCHes.ToList();
+            var query = branches.Where(x => inventorys.Any(y => x.BRANCH_NUM == y.BRANCH_NUM)); // get branches where inventory branch number matches
+
+            WROTE wrote = wrotes.First();
+
+            cdm.BOOK = book;
+            cdm.INVENTORIES = inventorys.ToList();
+            cdm.BRANCHES = query.ToList();
+            AUTHOR author = db.AUTHORs.Find(wrote.AUTHOR_NUM);
+            cdm.AUTHOR = author;
+
+            if (book == null)
             {
                 return HttpNotFound();
             }
-            return View(bOOK);
+            return View(cdm);
         }
 
         // GET: BOOKs/Create

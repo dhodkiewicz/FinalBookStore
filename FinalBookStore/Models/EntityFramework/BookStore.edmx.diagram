@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="a58186f5b47e4b56a7d8423d5e773814" Name="Diagram1">
-        <EntityTypeShape EntityType="HENRY_ASPNETModel.AUTHOR" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="HENRY_ASPNETModel.BOOK" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="HENRY_ASPNETModel.BRANCH" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HENRY_ASPNETModel.INVENTORY" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HENRY_ASPNETModel.AUTHOR" Width="1.5" PointX="1.875" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HENRY_ASPNETModel.BOOK" Width="1.5" PointX="3.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HENRY_ASPNETModel.BRANCH" Width="1.5" PointX="3.125" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HENRY_ASPNETModel.INVENTORY" Width="1.5" PointX="7.5" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="HENRY_ASPNETModel.PUBLISHER" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="HENRY_ASPNETModel.sysdiagram" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="HENRY_ASPNETModel.WROTE" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />

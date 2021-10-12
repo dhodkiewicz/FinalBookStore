@@ -1,57 +1,27 @@
-﻿@model IEnumerable<FinalBookStore.Models.EntityFramework.BOOK>
+﻿@using System.Globalization
+@using FinalBookStore.Models
+@model IEnumerable<FinalBookStore.Models.EntityFramework.BOOK>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Inventory</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TITLE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TYPE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PRICE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PAPERBACK)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PUBLISHER.PUBLISHER_NAME)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TITLE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TYPE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PRICE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PAPERBACK)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PUBLISHER.PUBLISHER_NAME)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BOOK_CODE }) |
-            @Html.ActionLink("Details", "Details", new { id=item.BOOK_CODE }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BOOK_CODE })
-        </td>
-    </tr>
-}
-
-</table>
+@{ var t = 0; var i = 1; }
+<div class="row">
+    @foreach (var item in Model)
+    {
+        var nameToTitleCase = @CultureInfo.CurrentCulture.TextInfo.ToTitleCase(item.TITLE);
+        string code = item.BOOK_CODE;
+        string urlBuilder = "~/Content/Images/" + code + "/thumb.jpg";
+        
+        <div class="col-md-3 top-buffer"><p>@nameToTitleCase</p>@Html.ImageActionLink("Details", "Details", "BOOKs", new { id = item.BOOK_CODE }, null,urlBuilder )</div>
+        if (i % 4 == 0)
+        {
+            t++;
+        @:</div><div class="row top-buffer">
+        }
+        i++;
+    }
+</div>

@@ -1,58 +1,116 @@
-﻿@model FinalBookStore.Models.EntityFramework.BOOK
+﻿@using FinalBookStore.Models
+@using FinalBookStore.Models.EntityFramework
+@model FinalBookStore.Models.CustomDataModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@{string urlbuilder = "../../Content/Images/" + Model.BOOK.BOOK_CODE + "/large.jpg";}
 
-<div>
+@{
+    BOOK book = Model.BOOK;
+    AUTHOR author = Model.AUTHOR;
+    List<INVENTORY> inventory = Model.INVENTORIES;
+    List<BRANCH> branches = Model.BRANCHES;
+    INVENTORY tempInventory = new INVENTORY();
+    string name = author.AUTHOR_FIRST + " " + author.AUTHOR_LAST;
+
+    List<ValuePair> branchAndOnHand = new List<ValuePair>();
+
+    if (branches != null)
+    {
+        foreach (BRANCH b in branches)
+        {
+            ValuePair vp = new ValuePair();
+            tempInventory = inventory.FirstOrDefault(i => i.BRANCH_NUM == b.BRANCH_NUM);
+            vp.BranchName = b.BRANCH_NAME;
+            vp.OnHand = tempInventory.ON_HAND;
+            branchAndOnHand.Add(vp);
+        }
+    }
+
+
+}
+<h2>Details</h2>
+<div class="col-md-8">
+    <img src=@urlbuilder />
+</div>
+<div class="col-md-4">
     <h4>BOOK</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.TITLE)
+            Title
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TITLE)
+            @book.TITLE
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TYPE)
+            GENRE
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TYPE)
+            @book.TYPE
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PRICE)
+            PRICE
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PRICE)
+            @book.PRICE
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PAPERBACK)
+            PAPERBACK
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PAPERBACK)
+            @book.PAPERBACK
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PUBLISHER.PUBLISHER_NAME)
+            Publisher Name
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PUBLISHER.PUBLISHER_NAME)
+            @book.PUBLISHER_CODE
+        </dd>
+
+        <dt>
+            Written By
+        </dt>
+
+        <dd>
+            @name
         </dd>
 
     </dl>
+@if (branchAndOnHand.Count > 0)
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Location</th>
+            <th>On Hand</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (ValuePair vp in branchAndOnHand)
+        {
+            <tr>
+                <td>@vp.BranchName</td>
+                <td>@vp.OnHand</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.BOOK_CODE }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

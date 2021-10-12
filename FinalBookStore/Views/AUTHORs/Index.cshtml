@@ -1,39 +1,32 @@
-﻿@model IEnumerable<FinalBookStore.Models.EntityFramework.AUTHOR>
+﻿@using System.IdentityModel.Tokens
+@using FinalBookStore.Models.EntityFramework
+@model IEnumerable<FinalBookStore.Models.EntityFramework.AUTHOR>
 
 @{
     ViewBag.Title = "Index";
+    List<SelectListItem> Authors = new List<SelectListItem>();
+    Authors.Add(new SelectListItem() { Text = "Select Author", Value= "" });
+    foreach (AUTHOR author in Model)
+    {
+        author.FullName = author.AUTHOR_FIRST + " " + author.AUTHOR_LAST;
+        Authors.Add(new SelectListItem(){Text = @author.FullName, Value = author.AUTHOR_NUM.ToString()});
+    }
 }
 
-<h2>Index</h2>
+<h2>Authors</h2>
+<div class="row">
+    <div class="col-4 text-center">
+    @using (Html.BeginForm("Details", "AUTHORs", FormMethod.Post))
+    {
+        @Html.DropDownList("id", Authors, new {onchange = "this.form.submit()"})
+    }
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AUTHOR_LAST)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AUTHOR_FIRST)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AUTHOR_LAST)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AUTHOR_FIRST)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AUTHOR_NUM }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AUTHOR_NUM }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AUTHOR_NUM })
-        </td>
-    </tr>
-}
 
-</table>
+            @*@Html.ValidationMessageFor(x => x.SelectedCountryIso3, "", new { @class = "text-danger" })*@
+
+
+
+

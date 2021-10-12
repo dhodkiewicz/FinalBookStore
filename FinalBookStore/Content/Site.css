@@ -136,3 +136,8 @@ p.search {
     color: #1c1c1c;
     text-size-adjust: 150%;
 }
+
+.book {
+    height: 125px;
+    width: 193px;
+}

@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Mvc;
 using FinalBookStore;
@@ -18,6 +19,7 @@ namespace FinalBookStore.Controllers
         // GET: AUTHORs
         public ActionResult Index()
         {
+            ViewBag.Authors = db.AUTHORs.ToList();
             return View(db.AUTHORs.ToList());
         }
 
@@ -33,6 +35,22 @@ namespace FinalBookStore.Controllers
             {
                 return HttpNotFound();
             }
+
+            var wrotes = db.WROTEs.Where(x => x.AUTHOR_NUM == aUTHOR.AUTHOR_NUM);
+            aUTHOR.WROTEs = wrotes.ToList();
+            if (aUTHOR.WROTEs.Count > 1)
+            {
+                aUTHOR.BOOKs =
+                    db.BOOKs.Where(x => wrotes.Any(y => x.BOOK_CODE == y.BOOK_CODE)).ToList();
+                // get books by wrotes
+            }
+
+            else
+            {
+                WROTE wrote = aUTHOR.WROTEs.First();
+                //aUTHOR.BOOKs = db.BOOKs.FirstOrDefault(x => x.BOOK_CODE == wrote.BOOK_CODE);
+            }
+
             return View(aUTHOR);
         }
 

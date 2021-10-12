@@ -6,28 +6,7 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>AUTHOR</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.AUTHOR_LAST)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AUTHOR_LAST)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AUTHOR_FIRST)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AUTHOR_FIRST)
-        </dd>
-
-    </dl>
-</div>
+@{Html.RenderPartial("_AuthorBooks");}
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.AUTHOR_NUM }) |
     @Html.ActionLink("Back to List", "Index")

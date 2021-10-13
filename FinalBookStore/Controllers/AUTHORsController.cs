@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using FinalBookStore;
 using FinalBookStore.Models.EntityFramework;
+using Microsoft.Ajax.Utilities;
 
 namespace FinalBookStore.Controllers
 {
@@ -57,13 +58,44 @@ namespace FinalBookStore.Controllers
             return View(aUTHOR);
         }
 
-        public ActionResult Details(string str)
-        {
+        // GET: AUTHORs/Details/5
+        //[HttpPost]
+        //public ActionResult Details(string authorName)
+        //{
+        //    if (authorName.IsNullOrWhiteSpace())
+        //    {
+        //        ModelState.AddModelError("","Please Enter an Author");
+        //        return View();
+        //    }
 
-            string x = str;
-            string apple = "apple";
-            //return View(aUTHOR);
-        }
+        //    bool flag = authorName.Any(c => char.IsDigit(c));
+        //    if (flag)
+        //    {
+        //        ModelState.AddModelError("", "No Numbers Allowed");
+        //            return View();
+        //    }
+
+        //    authorName = authorName.ToLower();
+
+        //    var authors = db.AUTHORs.ToList();
+        //    List<AUTHOR> formatAuthors = new List<AUTHOR>();
+        //    foreach(AUTHOR author in authors)
+        //    {
+        //        AUTHOR tempAuthor = new AUTHOR();
+        //        tempAuthor = author;
+        //        tempAuthor.FullName = author.AUTHOR_FIRST.ToLower() + " " + author.AUTHOR_LAST.ToLower();
+        //        formatAuthors.Add(tempAuthor);
+        //    }
+
+        //    var queriedAuthors = formatAuthors
+        //        .Where(b => b.FullName.Contains(authorName))
+        //        .FirstOrDefault();
+
+
+        //    return View(queriedAuthors);
+        //}
+
+
 
         // GET: AUTHORs/Create
         public ActionResult Create()

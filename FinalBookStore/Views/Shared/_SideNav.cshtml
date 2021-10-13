@@ -1,14 +1,22 @@
-﻿@model FinalBookStore.Models.EntityFramework.AUTHOR
+﻿
 
 <div class="container">
     <div class="row justify-content-end">
         <div class="col-md-6 col-md-push-8 searchfilter">
-            @using (Html.BeginForm("Details", "AUTHORs"))
-            {
+
                 <p class="search">
-                    Book Name @Html.TextBoxFor(x=>x.FullName) <input type="submit" value="Search" />
+                    @using (Html.BeginForm("Details", "AUTHORs", FormMethod.Post, new {id="authorName"}))
+
+                    {
+
+                        <p>
+                            Search Author
+                            @Html.TextBox("authorName")
+                        </p>
+                        <input type="submit" value="Search" />
+                    }
                 </p>
-            }
+            @Html.ValidationSummary(false)
         </div>
     </div>
 </div>

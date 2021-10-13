@@ -1,4 +1,5 @@
-﻿@model FinalBookStore.Models.EntityFramework.Validation
+﻿@using FinalBookStore.Models.EntityFramework
+@model FinalBookStore.Models.EntityFramework.Validation
 
 @section Scripts{
     <script>
@@ -17,6 +18,15 @@
 
 @{
     ViewBag.Title = "Contact";
+    List<SelectListItem> Branches = new List<SelectListItem>();
+    Branches.Add(new SelectListItem() { Text = "Select Branch", Value = "" });
+    foreach (BRANCH branch in ViewBag.branches)
+    {
+        Branches.Add(new SelectListItem()
+        {
+            Text = branch.BRANCH_NAME, Value = branch.BRANCH_NUM.ToString()
+        });
+    }
 }
 <h2>@ViewBag.Title</h2>
 
@@ -48,6 +58,10 @@
                 <div class="form-group conf_email">
                     <label>Confirm Email</label>
                     @Html.TextBoxFor(x => x.Uconfirmemail)
+                </div>
+                <div class="form-group conf_email">
+                    <label>Branch</label>
+                    @Html.DropDownList("Branch", Branches)
                 </div>
                 <div class="form-group comment">
                     <label>Leave a Comment</label>

@@ -57,6 +57,14 @@ namespace FinalBookStore.Controllers
             return View(aUTHOR);
         }
 
+        public ActionResult Details(string str)
+        {
+
+            string x = str;
+            string apple = "apple";
+            //return View(aUTHOR);
+        }
+
         // GET: AUTHORs/Create
         public ActionResult Create()
         {

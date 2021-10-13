@@ -9,6 +9,7 @@ namespace FinalBookStore.Controllers
 {
     public class HomeController : Controller
     {
+        private HENRY_ASPNETEntities db = new HENRY_ASPNETEntities();
         public ActionResult Index()
         {
             return View();
@@ -23,8 +24,9 @@ namespace FinalBookStore.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
 
+            var branches = db.BRANCHes.ToList();
+            ViewBag.branches = branches;
             return View();
         }
 

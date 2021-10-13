@@ -32,9 +32,17 @@ namespace FinalBookStore.Controllers
         [HttpPost]
         public JsonResult Contact(Validation model)
         {
-            ViewBag.Message = "Your contact page.";
-
+            //get data from inbound model
+            if (String.IsNullOrEmpty(model.Fname))
+            {
+                ModelState.AddModelError("First Name", "Please Enter First Name");
+            }
+            if (String.IsNullOrEmpty(model.Lname))
+            {
+                ModelState.AddModelError("Last Name", "Please Enter Last Name");
+            }
             return Json(model);
         }
     }
 }
+

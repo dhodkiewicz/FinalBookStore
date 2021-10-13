@@ -150,3 +150,11 @@ p.search {
 .loading {
     display: none;
 }
+
+.help-block ul{
+    list-style-type: none;
+    color: red;
+}
+
+.email{ padding-left: 32px;}
+.lname{ padding-top: 15px;}

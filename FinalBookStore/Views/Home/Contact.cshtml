@@ -7,7 +7,7 @@
             target.empty();
 
             if (uData) {
-                target.append("<h3>Thanks for sharing your comments! We are always looking to improve our Services</h3>");
+                target.append("<h3>Thanks for sharing your comments.. We are always looking to improve our Services!</h3>");
             } else {
                 target.append("<h3>Received no data</h3>");
             }
@@ -33,15 +33,15 @@
     {
         <div class="row col-6 text-center">
             <form>
-                <div class="form-group">
+                <div class="form-inline">
                     <label>First Name</label>
                     @Html.TextBoxFor(x => x.Fname)
                 </div>
-                <div class="form-group">
+                <div class="form-group lname">
                     <label>Last Name</label>
                     @Html.TextBoxFor(x => x.Lname)
                 </div>
-                <div class="form-group">
+                <div class="form-group email">
                     <label>Email</label>
                     @Html.TextBoxFor(x => x.Uemail)
                 </div>
@@ -55,6 +55,10 @@
                 </div>
                 <button type="reset" class="btn btn-secondary">Clear</button>
                 <button type="submit" class="btn btn-primary">Submit</button>
+
+                <span class="help-block">
+                    @Html.ValidationSummary(false) 
+                </span>
             </form>
                 </div>
 

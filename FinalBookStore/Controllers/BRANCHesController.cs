@@ -51,6 +51,11 @@ namespace FinalBookStore.Controllers
                 var branch = db.BRANCHes.Find(temp);
                 List<BRANCH> branchList = new List<BRANCH>();
                 branchList.Add(branch);
+                ViewBag.branch = branch;
+
+                var inventories = db.INVENTORies.Where(p => p.BRANCH_NUM == temp);
+                ViewBag.inventories = inventories;
+
                 return View(branchList);
             }
             return View(db.BRANCHes.ToList());

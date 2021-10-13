@@ -141,3 +141,12 @@ p.search {
     height: 125px;
     width: 193px;
 }
+
+.green {
+    color: chartreuse;
+    font-weight: bold;
+}
+
+.loading {
+    display: none;
+}

@@ -1,17 +1,65 @@
-﻿@{
+﻿@model FinalBookStore.Models.EntityFramework.Validation
+
+@section Scripts{
+    <script>
+        function ShowSuccess(uData) {
+            var target = $("#myForm");
+            target.empty();
+
+            if (uData) {
+                target.append("<h3>Thanks for sharing your comments! We are always looking to improve our Services</h3>");
+            } else {
+                target.append("<h3>Received no data</h3>");
+            }
+        }
+    </script>
+}
+
+@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h2>@ViewBag.Title</h2>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div id ="myForm" class="container-fluid">
+    @using (Ajax.BeginForm("Contact", "Home", new AjaxOptions
+    {
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "loading",
+        LoadingElementDuration = 3000,
+        OnSuccess = "ShowSuccess"
+    }
+        ))
+    {
+        <div class="row col-6 text-center">
+            <form>
+                <div class="form-group">
+                    <label>First Name</label>
+                    @Html.TextBoxFor(x => x.Fname)
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    @Html.TextBoxFor(x => x.Lname)
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    @Html.TextBoxFor(x => x.Uemail)
+                </div>
+                <div class="form-group">
+                    <label>Confirm Email</label>
+                    @Html.TextBoxFor(x => x.Uconfirmemail)
+                </div>
+                <div class="form-group">
+                    <label>Leave a Comment</label>
+                    @Html.TextAreaFor(x => x.Ucomment)
+                </div>
+                <button type="reset" class="btn btn-secondary">Clear</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+                </div>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    }
+</div>
+<div id ="loading" class="loading text-center">
+    <h2>Sending....</h2>
+</div>

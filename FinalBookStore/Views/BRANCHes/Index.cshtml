@@ -32,3 +32,54 @@
         }
     </div>
 </div>
+
+@if (flag)
+{
+    <h2 class="text-center">@ViewBag.branch.BRANCH_NAME</h2>
+    <div class="row-cols-md-6">
+        <div class="col-md-6">
+            <table class="table align-middle">
+                <tr>
+                    <th class="green">Branch Number</th>
+                    <th>@ViewBag.branch.BRANCH_NUM</th>
+                </tr>
+
+                <tr>
+                    <th class="green">Branch Location</th>
+                    <th>@ViewBag.branch.BRANCH_LOCATION</th>
+                </tr>
+
+                <tr>
+                    <th class="green">Number of Employees</th>
+                    <th>@ViewBag.branch.NUM_EMPLOYEES</th>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6 align-content-center">
+            <table class="table align-middle">
+                <tr class="green">
+                    <th>Title</th>
+                    <th>Quantity On Hand</th>
+                </tr>
+@foreach(INVENTORY i in ViewBag.inventories)
+    {
+        <tr>
+            <th>                         @Html.ActionLink(
+                                             i.BOOK.TITLE, // linkText
+                                             "Details", // actionName
+                                             "BOOKs", // controllerName
+                                             new
+                                             {
+                                                 // routeValues
+                                                 ID = i.BOOK.BOOK_CODE
+                                             },
+                                             null // htmlAttributes
+                                             )
+                </th>
+            <th>@i.ON_HAND</th>
+        </tr>
+    }
+            </table>
+        </div>
+    </div>
+}
